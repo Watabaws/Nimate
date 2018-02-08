@@ -1,6 +1,8 @@
 var ID = 0;
 var grow = true;
 var circSize = 20;
+var bounceX = 150, bounceY = 300;
+var multX = 1, multY = 1;
 
 var c = document.getElementById("slate");
 var ctx = c.getContext("2d");
@@ -35,6 +37,31 @@ var drawCirc = function(x, y){
 var bgn = document.getElementById("begin");
 bgn.addEventListener("click", drawCirc);
 
+
+var dvdBounce = function(){
+    clear();
+    ctx.beginPath();
+    ctx.arc(bounceX, bounceY, 30, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.stroke();
+
+    if(bounceX == 30 || bounceX == 570){
+        multX *= -1;
+    }
+
+    if(bounceY == 30 || bounceY == 570){
+        multY *= -1;
+    }
+
+    bounceX += Math.random() * 4 * multX;
+    bounceY += Math.random() * 4 * multY;
+
+    window.requestAnimationFrame(dvdBounce);
+}
+
+var dvd = document.getElementById("dvd");
+dvd.addEventListener("click", dvdBounce);
+
 var stopAnim = function(){
   if(ID){
     window.cancelAnimationFrame(ID);
@@ -50,3 +77,6 @@ var changeMode = function(){
 
 var chng = document.getElementById("mode");
 chng.addEventListener("click", changeMode);
+
+
+

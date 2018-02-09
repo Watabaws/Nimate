@@ -45,16 +45,18 @@ var dvdBounce = function(){
     ctx.fill();
     ctx.stroke();
 
-    if(bounceX == 30 || bounceX == 570){
+    if(bounceX <= 30 || bounceX >= 570){
         multX *= -1;
     }
 
-    if(bounceY == 30 || bounceY == 570){
+    if(bounceY <= 30 || bounceY >= 570){
         multY *= -1;
     }
 
-    bounceX += Math.random() * 4 * multX;
-    bounceY += Math.random() * 4 * multY;
+    var speed = 4;
+
+    bounceX += speed * multX;
+    bounceY += speed * multY;
 
     window.requestAnimationFrame(dvdBounce);
 }
@@ -77,6 +79,3 @@ var changeMode = function(){
 
 var chng = document.getElementById("mode");
 chng.addEventListener("click", changeMode);
-
-
-
